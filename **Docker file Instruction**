@@ -17,7 +17,7 @@
        --timeout=DURATION(default:30s)
        --start-period=Duration(default=0s)
        --retires=N(default:3)
-
+-> ENTRYPOINT does not allow you to override the command
 
 
 #vim Dockerfile
