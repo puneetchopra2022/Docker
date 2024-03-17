@@ -47,3 +47,16 @@ Docker Learning
 
 **Image Creation, Management & Registry**
 
+- A docker file is built to form an image that holds a set of instructions to run an application.
+- #docker build.     - build an image
+- docker instructions - FROM, CMD, RUN, COPY, ADD , EXPOSE, HEALTHCHECK(HEALTHCHECK --interval=5s CMD ping -c 1 172.17.0.2), WORKDIR, ENTRYPOINT(ENTRYPOINT [‘’/bin/ping ’’])
+- Reason why every docker image start with FROM : FROM instruction initializes a new build stage and sets the Base Image for subsequent instructions. As such, a valid Dockerfile MUST start with a FROM instruction
+- #docker build. -t <nameof image:tag>            - adding an tag to image while creating image
+- #docker image tag <imageid> <nameof image:tag>      - addition of tag to existing image
+- #docker image tag <old image name>:<old tag>  <new image name>:<new tag>  - remain an tag to existing image
+- #docker commit <container id>  <newimagename>        - create an new image with updated container information.
+- #docker image history <nameof image>   - list layers of image
+- #docker image inspect <name of image>  - details about docker image
+- #docker image prune   - delete only dangling images + unreferenced by any container
+- #docker image prune -a    - delete all images not referenced by any container 
+
