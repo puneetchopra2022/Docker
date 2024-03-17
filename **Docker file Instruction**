@@ -1,0 +1,63 @@
+**Docker file Instruction**
+
+-> FROM : From instruction initilizes an new build stage & set an base image for subsequently instructions.
+-> CMD :
+-> COPY & ADD : 
+   COPY & ADD are both docker instructions that server similar purpose, they let you copy files a specific location into Docker Image 
+   COPY only lets you copy file or directory from your Host into docker 
+   ADD lets you do 
+       •	Same as COPY command allow you copy file or directory from your Host into docker
+       •	You can use URL instead of a local file/Directory 
+       •	Allow you to extract a component of tar file from Source directly to destination docker location.
+-> EXPOSE :The EXPOSE instruction informs Docker that container listens on the specified network ports at runtime,
+-> WORKDIR :The WORKDIR instruction sets the working directory 
+-> HEALTHCHECK :
+       HEALTHCHECK –interval=5s CMD ping -c 1 172.17.0.2
+       --interval=DURATION(default:30s)
+       --timeout=DURATION(default:30s)
+       --start-period=Duration(default=0s)
+       --retires=N(default:3)
+
+
+
+#vim Dockerfile
+
+=========================
+FROM ubuntu
+RUN apt-get update -y
+RUN apt-get install -y nginx
+WORKDIR /usr/share/nginx/html
+COPY index.html  /usr/share/nginx/html
+EXPOSE 8080
+ADD compressedfile.tar.gz /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"] 
+
+===========================
+
+#docker build .
+
+
+======================
+From busybox
+HEALTHCHECK --interval=3s CMD ping -c 1 172.17.0.5
+
+==============
+#docker build .
+#docker run -dt <imageid> sleep 5000
+
+
+
+========
+FROM busybox
+ENTRYPOINT [‘’/bin/ping ’’]
+==========
+#docker build .
+#docker run -dt <imageid> -c 1 8.8.8.8
+
+
+
+
+
+
+
+
