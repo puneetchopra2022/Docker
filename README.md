@@ -107,4 +107,42 @@ Docker Learning
 - #docker run -dt -v /home/docker/index.html:/usr/share/nginx/html/index.html  nginx    - command to manual mount file on container i.e bind mount
 - #docker run -dt -v /home/docker/:/var/log   nginx sleep 500000    - command to manual mount directroy on container i.e bind mount
 
-       
+**Docker Orchestration**
+- Orchestration: managing the life cycle of a container, especially in a large dynamic environment, Provisioning, upscaling, Downscaling, health check of Container -Docker swarm, Kubernetes, Mesos, AWS EKS.
+- #docker swarm init --advertise-addr <Ipaddressofeth0>  - command to run on master Node to be swarm master.
+- #docker swarm join --token manager/worker - Command to add docker swarm manager or swarm worker to manager node, it will give an instruction on how to Join.
+- #docker swarm leave --force  – command to leave from swarm cluster for a specific node
+- #docker node ls    - list the available worker node in the cluster
+- #docker service create --replica=1 <nameofimage>            -  to create an container/service in swarm cluster
+- #docker service ls   -command to list services
+- #docker service rm <nameofservice >    - command to remove services
+- #docker service scale <nameofservice>=3     -upscale replicas
+- #docker service update --replica=3 <nameofservice>
+- #docker service ps    - command to list service running on which node
+- #docker service create --dt --name <nameofservice> --mode global  <nameofimage>    -command to deploy an service globally on all Node
+- #docker service create --name <nameofservice> --replica=3 --publish 8080:80 <nameofimage> – command to launch service with exposed port
+- #docker node update --availability drain <nameofswarm Node>
+- #docker node update --availability active <nameofnode>
+- #docker inspect node <nameofnode>   – command to check node details
+- #docker node update --label-add region=mumbai <nodename>
+- #docker service create --name myconstraint --constraint node.labels.region==mumbai --replicas 3 nginx
+- Locking swarm Cluster - swarm cluster consists of a lot of sensitive data - TLS key used to encrypt communication b/w swarm nodes, RAft logs  , /var/lib/docker/swarm/certificates
+- #docker swarm update --autolock=true   - to lock an swarm cluster
+- #docker swarm unlock    - to unlock a swarm cluster
+- Docker Compose - Docker Compose is a tool for defining and running multi-container applications. 
+- #docker-compose config   -   in standalone cluster 
+- #docker-compose up  -  in standalone cluster 
+- #docker-compose down  - in standalone cluster
+- #docker stack deploy --compose-file <naemoffile> <nameofservice>
+- #docker stack ls  - in swarm cluster 
+- #docker stack ps  - in swarm cluster 
+- #docker stack service - in swarm cluster  
+- #docker stack rm <nameofservice>  -  in swarm cluster 
+- Overlay network driver : The overlay network driver creates a distributed network among multiple Docker daemon hosts. This network sits on top of (overlays) the host-specific networks, allowing containers connected to 
+  it to communicate securely when encryption is enabled.
+- #docker network create --driver overlay --name <nameofnetwork>  - this command will create an overlay network driver
+- #docker network create --opt encrypted --driver overlay --name <nameofnetwork> -  this command will create an overlay network driver with ensure communication is secure
+- Split Brain Problem:
+- Quorum : recommandation to have odd number of manager node to maintained HA , An N manager cluster tolerates the loss of at most (N-1)/2 managers.
+- Universal control plan  -  its enterprise on-prem application solution to manage, deploy, and monitor docker containers in a single place.
+  
