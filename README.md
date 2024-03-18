@@ -4,7 +4,8 @@ Docker Learning
 **Introduction to Docker**
 
 -  Why do we need Docker - Hardware compatibility, OS compatibility, Libraries Dependencies
--  What can docker Do - Run an application on an Isolated container, that has its own network interfaces, libraries, and processors like virtual machines except for all containers that share the same OS kernels.( Hardware > OS > Docker >Conatiner)
+-  What can docker Do - Run an application on an Isolated container, that has its own network interfaces, libraries, and processors like virtual machines except for all containers that share the same OS kernels.( 
+   Hardware > OS > Docker >Conatiner)
 -  Virtual machine VS Docker  - Bootup time, Storage, Utilization.
 -  Docker Edition - Community Edition(free) , Enterprise Edition (paid).
 -  Docker installation - Windows(docker desktop) , Linux( docker)
@@ -34,9 +35,9 @@ Docker Learning
 -  #docker run -d -p 8080:80 <imagename>   - run an container with publish port
 -  #docker exec -it <conatiner name> bash    - exec into container
 -  #docker run -d <imagename> command - command to override the container default command
--  Restart Policies in Docker - no, unless-stopped( it is similar to the always flag the only difference is once the container is stopped manually it will not restart automatically even after restarting the docker daemon, until 
-   we start the container manually again.), on-failure(Restart the container if it exits due to an error), always (Always restart the container if it stops. If it's manually stopped, it's restarted only when the Docker daemon 
-   restarts or the container itself is manually restarted)
+-  Restart Policies in Docker - no, unless-stopped( it is similar to the always flag the only difference is once the container is stopped manually it will not restart automatically even after restarting the docker 
+   daemon, until we start the container manually again.), on-failure(Restart the container if it exits due to an error), always (Always restart the container if it stops. If it's manually stopped, it's restarted only 
+   when the Docker daemon restarts or the container itself is manually restarted)
 -  #docker run --restart unless-stopped <imagename>
 -  #docker system df    -command to check disk space
 -  #docker system df -v   - command to show container & image vise size
@@ -61,8 +62,8 @@ Docker Learning
 - #docker image inspect <nameofimage>  - details about docker image
 - #docker image prune   - delete only dangling images + unreferenced by any container
 - #docker image prune -a    - delete all images not referenced by any container
-- Docker Registry - The concept of Registry comes in place as it's not recommended to have custom images on a local repository on a local disk it is available on the registry that is easily accessible to anyone  - Docker Hub, AWS 
-  ECR, Docker Registry, Docker Trusted registry
+- Docker Registry - The concept of Registry comes in place as it's not recommended to have custom images on a local repository on a local disk it is available on the registry that is easily accessible to anyone  - 
+  Docker Hub, AWS ECR, Docker Registry, Docker Trusted registry
 - Docker Hub repo push & pull
        : Create an Docker Hub account
        : #docker login
@@ -73,7 +74,7 @@ Docker Learning
 - #docker save <imagename>    >   <imagename>.tar    - command to save the image into tar to export to a different system
 - #docker load -i < imagename.tar                  - command to extract an image from tar
 - Concept of docker layer: Each instruction belongs to a single layer, the container top layer is a writable layer, and every container uses the same image until the write has been made on the container.
-- #docker run -dt -P <nameof image >  -  this command all expose of port on random publish ports
+- #docker run -dt -P <nameofimage >  -  this command all expose of port on random publish ports
 
 **Networking**
 
@@ -97,8 +98,8 @@ Docker Learning
 - update logging driver for all containers following changes in the daemon.json file located under /etc/docker
 
 **Volumes**
-- Docker Volume - data inside a container is not persisted so the way to make data available even after termination of the container is via the local mount point and bind Mount ( When you use bind mount, a file or directory on 
-  the host machine is mounted into a container ) Volume can be mounted on multiple containers simultaneously & volume cant be deleted automatically.
+- Docker Volume - data inside a container is not persisted so the way to make data available even after termination of the container is via the local mount point and bind Mount ( When you use bind mount, a file or 
+  directory on the host machine is mounted into a container ) Volume can be mounted on multiple containers simultaneously & volume cant be deleted automatically.
 - #docker volume ls    - list active volume.
 - #docker volume create <nameofvol>   - manual create an persistence volume from local docker host volume
 - #docker volume inspect  <name of volume>
@@ -145,4 +146,16 @@ Docker Learning
 - Split Brain Problem:
 - Quorum : recommandation to have odd number of manager node to maintained HA , An N manager cluster tolerates the loss of at most (N-1)/2 managers.
 - Universal control plan  -  its enterprise on-prem application solution to manage, deploy, and monitor docker containers in a single place.
+
+**Docker Secret**
+- a secret is a blob of data, such as a password, SSH private key, SSL certificate, or another piece of data that should not be transmitted over a network or stored unencrypted in a Dockerfile or in your application's 
+  source code,You can use Docker secrets to centrally manage this data and securely transmit it to only those containers that need access to it. Secrets are encrypted during transit and at rest in a Docker swarm. A 
+  given secret is only accessible to those services which have been granted explicit access to it, and only while those service tasks are running.
+- #docker secret create my_secret -       — When creating a secret, the command accepts input from the command line
+- #docker secret create my_secret /path/to/secret/file    - manually typing input with a keyboard is both error-prone and not practical when combined with automated flows. Therefore, we can also use the contents of a 
+  file to create a secret
+- #docker secret ls    ---- to list all secret
+- #docker secret inspect   <nameofsecret>
+- #docker service create --name <nameofservice> --secret <nameofsecret>   <imagename> 
+- #docker container exec -it <container ID> ls -l /run/secrets  
   
