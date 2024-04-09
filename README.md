@@ -83,10 +83,10 @@ Docker Learning
 - Host network - it removes the network isolation between the docker host & docker container, i.e container created with publish port 80 can be reached with port 80 outside the world as well
 - None network -  networking is completely disabled in this drive type
 - #docker network ls    - list all available network drivers
-- #docker inspect network <drivername>    - details of network driver
-- #docker run -dt --network <nameofdriver>   <imagename>   - run container on specific container.
-- #docker network create --driver bridge <nameofcustombridgenetwork>    - create a user define bridge network
-- #docker network create --driver bridge <nameofcustombridgenetwork>  --gateway 172.0.0.1 --subnet 172.0.0.0/24  - create an user define bridge network with custom subnet IP range
+- #docker inspect network < drivername >    - details of network driver
+- #docker run -dt --network < nameofdriver >   < imagename >   - run container on specific container.
+- #docker network create --driver bridge < nameofcustombridgenetwork >    - create a user define bridge network
+- #docker network create --driver bridge < nameofcustombridgenetwork >  --gateway 172.0.0.1 --subnet 172.0.0.0/24  - create an user define bridge network with custom subnet IP range
 
 **Storage & Logging Driver**
 - #docker info   - check active storage Driver & logging Driver
