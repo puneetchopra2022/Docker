@@ -19,7 +19,7 @@ Docker Learning
 -  Docker Container: is a running instance of an image
 -  #docker pull <imagename>  -command to pull image
 -  #docker image ls  -command to list images
--  #docker run <imagename>   - command to launch an container
+-  #docker run < imagename >   - command to launch an container
 -  #docker ps  - list all active container list
 -  #docker ps -a - list all active & exit container list
 -  #docker stop <containerid.name>   - stop a container
