@@ -42,7 +42,7 @@ Docker Learning
 -  #docker system df    -command to check disk space
 -  #docker system df -v   - command to show container & image vise size
 -  #docker run -d  --rm < imagename >   command to delete an container after exit
--  #docker rename < oldcontainername >  <newcontainername>        - command to rename container
+-  #docker rename < oldcontainername >  < newcontainername >        - command to rename container
 -  #docker top < conatiner ID > — command gives details of Process id belonging to the container
 -  #docker ps --size  – command gives information on the current size of the docker container
 -  #apt install  net-tools ------ to install ifconfig package
@@ -54,12 +54,12 @@ Docker Learning
 - #docker build.     - build an image
 - docker instructions - FROM, CMD, RUN, COPY, ADD , EXPOSE, HEALTHCHECK(HEALTHCHECK --interval=5s CMD ping -c 1 172.17.0.2), WORKDIR, ENTRYPOINT(ENTRYPOINT [‘’/bin/ping ’’])
 - Reason why every docker image start with FROM : FROM instruction initializes a new build stage and sets the Base Image for subsequent instructions. As such, a valid Dockerfile MUST start with a FROM instruction
-- #docker build . -t <nameofimage>:tag            - adding an tag to image while creating image
-- #docker image tag <imageid> <nameofimage>:tag      - addition of tag to existing image
-- #docker image tag <oldimagename>:<oldtag>  <newimagename>:<newtag>  - remain an tag to existing image
-- #docker commit <containerid>  <newimagename>        - create an new image with updated container information.
-- #docker image history <nameofimage>   - list layers of image
-- #docker image inspect <nameofimage>  - details about docker image
+- #docker build . -t < nameofimage >:tag            - adding an tag to image while creating image
+- #docker image tag < imageid > < nameofimage >:tag      - addition of tag to existing image
+- #docker image tag < oldimagename >:< oldtag >  <newimagename>:<newtag>  - remain an tag to existing image
+- #docker commit < containerid >  < newimagename >        - create an new image with updated container information.
+- #docker image history < nameofimage >   - list layers of image
+- #docker image inspect < nameofimage >  - details about docker image
 - #docker image prune   - delete only dangling images + unreferenced by any container
 - #docker image prune -a    - delete all images not referenced by any container
 - Docker Registry - The concept of Registry comes in place as it's not recommended to have custom images on a local repository on a local disk it is available on the registry that is easily accessible to anyone  - 
