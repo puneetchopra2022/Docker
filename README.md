@@ -67,14 +67,14 @@ Docker Learning
 - Docker Hub repo push & pull
        : Create an Docker Hub account
        : #docker login
-       : #docker image tag <currentimagename>:tag  puneet2022/learning:<imagenamewhichneedtobereflectinHUBrepo>
-       : #docker push puneet2022/learning:<imagenamewhichneedtobereflectinHUBrepo>
-       : #docker pull puneet2022/learning:<imagenamewhichneedtobereflectinHUBrepo>
-- #docker search <nameofimage>   - Command to search a specific image
-- #docker save <imagename>    >   <imagename>.tar    - command to save the image into tar to export to a different system
+       : #docker image tag < currentimagename >:tag  puneet2022/learning:< imagenamewhichneedtobereflectinHUBrepo >
+       : #docker push puneet2022/learning:< imagenamewhichneedtobereflectinHUBrepo >
+       : #docker pull puneet2022/learning:< imagenamewhichneedtobereflectinHUBrepo >
+- #docker search < nameofimage >   - Command to search a specific image
+- #docker save < imagename >    >   < imagename >.tar    - command to save the image into tar to export to a different system
 - #docker load -i < imagename.tar                  - command to extract an image from tar
 - Concept of docker layer: Each instruction belongs to a single layer, the container top layer is a writable layer, and every container uses the same image until the write has been made on the container.
-- #docker run -dt -P <nameofimage >  -  this command all expose of port on random publish ports
+- #docker run -dt -P < nameofimage >  -  this command all expose of port on random publish ports
 
 **Networking**
 
