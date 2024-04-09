@@ -93,18 +93,18 @@ Docker Learning
 - Storage Drive: Works on the principle of copy on write, which means a single copy has been used until the write has been made. (cd /var/lib/docker/overlay2), almost all linux based system are using overlay2 drivers
 - logging Driver - json-file(the default driver, storing logs in JSON files.) ,awslogs ,syslog( Forwards logs to a syslog server) ,splunk , local, none
 - #docker info -  to check login driver
-- #docker container inspect <containerID>  -  to check the logging driver in running container
-- #docker run -dt --log-driver <specifytypeofloggingdriveryouwant>  <imagename>   -  way to change logging driver to container
+- #docker container inspect < containerID >  -  to check the logging driver in running container
+- #docker run -dt --log-driver < specifytypeofloggingdriveryouwant >  < imagename >   -  way to change logging driver to container
 - update logging driver for all containers following changes in the daemon.json file located under /etc/docker
 
 **Volumes**
 - Docker Volume - data inside a container is not persisted so the way to make data available even after termination of the container is via the local mount point and bind Mount ( When you use bind mount, a file or 
   directory on the host machine is mounted into a container ) Volume can be mounted on multiple containers simultaneously & volume cant be deleted automatically.
 - #docker volume ls    - list active volume.
-- #docker volume create <nameofvol>   - manual create an persistence volume from local docker host volume
-- #docker volume inspect  <name of volume>
-- #docker run -dt -v <nameofvolume>:<mountingdirofcontainer>   <imagename>    - command to manual mount an local volume host machine to container directory
-- #docker run -dt -v  <pathoflocalfile>:<pathofcontainerwhereoutputfile> <imagename>   - command to manual mount file on container i.e bind mount
+- #docker volume create < nameofvol >   - manual create an persistence volume from local docker host volume
+- #docker volume inspect  < name of volume >
+- #docker run -dt -v < nameofvolume >:< mountingdirofcontainer >   <imagename>    - command to manual mount an local volume host machine to container directory
+- #docker run -dt -v  < pathoflocalfile >:< pathofcontainerwhereoutputfile > < imagename >   - command to manual mount file on container i.e bind mount
 - #docker run -dt -v /home/docker/index.html:/usr/share/nginx/html/index.html  nginx    - command to manual mount file on container i.e bind mount
 - #docker run -dt -v /home/docker/:/var/log   nginx sleep 500000    - command to manual mount directroy on container i.e bind mount
 
@@ -116,15 +116,15 @@ Docker Learning
 - #docker node ls    - list the available worker node in the cluster
 - #docker service create --replica=1 <nameofimage>            -  to create an container/service in swarm cluster
 - #docker service ls   -command to list services
-- #docker service rm <nameofservice >    - command to remove services
-- #docker service scale <nameofservice>=3     -upscale replicas
-- #docker service update --replica=3 <nameofservice>
+- #docker service rm < nameofservice >    - command to remove services
+- #docker service scale < nameofservice >=3     -upscale replicas
+- #docker service update --replica=3 < nameofservice >
 - #docker service ps    - command to list service running on which node
-- #docker service create --dt --name <nameofservice> --mode global  <nameofimage>    -command to deploy an service globally on all Node
-- #docker service create --name <nameofservice> --replica=3 --publish 8080:80 <nameofimage> – command to launch service with exposed port
+- #docker service create --dt --name < nameofservice > --mode global  <nameofimage>    -command to deploy an service globally on all Node
+- #docker service create --name < nameofservice> --replica=3 --publish 8080:80 < nameofimage > – command to launch service with exposed port
 - #docker node update --availability drain <nameofswarm Node>
 - #docker node update --availability active <nameofnode>
-- #docker inspect node <nameofnode>   – command to check node details
+- #docker inspect node < nameofnode >   – command to check node details
 - #docker node update --label-add region=mumbai <nodename>
 - #docker service create --name myconstraint --constraint node.labels.region==mumbai --replicas 3 nginx
 - Locking swarm Cluster - swarm cluster consists of a lot of sensitive data - TLS key used to encrypt communication b/w swarm nodes, RAft logs  , /var/lib/docker/swarm/certificates
@@ -139,8 +139,7 @@ Docker Learning
 - #docker stack ps  - in swarm cluster 
 - #docker stack service - in swarm cluster  
 - #docker stack rm <nameofservice>  -  in swarm cluster 
-- Overlay network driver : The overlay network driver creates a distributed network among multiple Docker daemon hosts. This network sits on top of (overlays) the host-specific networks, allowing containers connected to 
-  it to communicate securely when encryption is enabled.
+- Overlay network driver : The overlay network driver creates a distributed network among multiple Docker daemon hosts. This network sits on top of (overlays) the host-specific networks, allowing containers connected to it to communicate securely when encryption is enabled.
 - #docker network create --driver overlay --name <nameofnetwork>  - this command will create an overlay network driver
 - #docker network create --opt encrypted --driver overlay --name <nameofnetwork> -  this command will create an overlay network driver with ensure communication is secure
 - Split Brain Problem:
@@ -148,12 +147,9 @@ Docker Learning
 - Universal control plan  -  its enterprise on-prem application solution to manage, deploy, and monitor docker containers in a single place.
 
 **Docker Secret**
-- a secret is a blob of data, such as a password, SSH private key, SSL certificate, or another piece of data that should not be transmitted over a network or stored unencrypted in a Dockerfile or in your application's 
-  source code,You can use Docker secrets to centrally manage this data and securely transmit it to only those containers that need access to it. Secrets are encrypted during transit and at rest in a Docker swarm. A 
-  given secret is only accessible to those services which have been granted explicit access to it, and only while those service tasks are running.
-- #docker secret create my_secret -       — When creating a secret, the command accepts input from the command line
-- #docker secret create my_secret /path/to/secret/file    - manually typing input with a keyboard is both error-prone and not practical when combined with automated flows. Therefore, we can also use the contents of a 
-  file to create a secret
+- a secret is a blob of data, such as a password, SSH private key, SSL certificate, or another piece of data that should not be transmitted over a network or stored unencrypted in a Dockerfile or in your application's source code,You can use Docker secrets to centrally manage this data and securely transmit it to only those containers that need access to it. Secrets are encrypted during transit and at rest in a Docker swarm. A given secret is only accessible to those services which have been granted explicit access to it, and only while those service tasks are running.
+- #docker secret create my_secret -   — When creating a secret, the command accepts input from the command line
+- #docker secret create my_secret /path/to/secret/file    - manually typing input with a keyboard is both error-prone and not practical when combined with automated flows. Therefore, we can also use the contents of a  file to create a secret
 - #docker secret ls    ---- to list all secret
 - #docker secret inspect   <nameofsecret>
 - #docker service create --name <nameofservice> --secret <nameofsecret>   <imagename> 
