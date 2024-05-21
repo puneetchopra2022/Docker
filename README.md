@@ -75,6 +75,7 @@ Docker Learning
 - #docker load -i < imagename.tar                  - command to extract an image from tar
 - Concept of docker layer: Each instruction belongs to a single layer, the container top layer is a writable layer, and every container uses the same image until the write has been made on the container.
 - #docker run -dt -P < nameofimage >  -  this command all expose of port on random publish ports
+- how to reduce docker image size: Make use of lower size of base image: alpine image, minimum number of layers in image, use COPY instructions after RUN instructions. https://devopscube.com/reduce-docker-image-size/ 
 
 **Networking**
 
