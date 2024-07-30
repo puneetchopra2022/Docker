@@ -8,7 +8,7 @@ Docker Learning
    Hardware > OS > Docker >Conatiner)
 -  Virtual machine VS Docker  - Bootup time, Storage, Utilization.
 -  Docker Edition - Community Edition(free) , Enterprise Edition (paid).
--  Docker installation - Windows(docker desktop) , Linux( docker)
+-  Docker installation - Windows(docker desktop) , Linux ( docker)
 -  #systemctl status docker    -command to check docker daemon service running status
 -  #systemctl start docker - command to manual start docker daemon
 -  #systemctl stop docker - command to stop docker daemon
@@ -36,11 +36,11 @@ Docker Learning
 -  #docker exec -it < conatiner name > bash    - exec into container
 -  #docker run -d < imagename > command - command to override the container default command
 -  Restart Policies in Docker - no, unless-stopped( it is similar to the always flag the only difference is once the container is stopped manually it will not restart automatically even after restarting the docker 
-   daemon, until we start the container manually again.), on-failure(Restart the container if it exits due to an error), always (Always restart the container if it stops. If it's manually stopped, it's restarted only 
-   when the Docker daemon restarts or the container itself is manually restarted)
+   daemon, until we start the container manually again.), on-failure(Restart the container if it exits due to an non-zero exit code. Exit code :- 0 means no error), always (Always restart the container if it stops. If 
+   it's manually stopped, it's restarted only when the Docker daemon restarts or the container itself is manually restarted)
 -  #docker run --restart unless-stopped <imagename>
 -  #docker system df    -command to check disk space
--  #docker system df -v   - command to show container & image vise size
+-  #docker system df -v   - command to show container & image wiae size
 -  #docker run -d  --rm < imagename >   command to delete an container after exit
 -  #docker rename < oldcontainername >  < newcontainername >        - command to rename container
 -  #docker top < conatiner ID > — command gives details of Process id belonging to the container
@@ -68,7 +68,7 @@ Docker Learning
        : Create an Docker Hub account
        : #docker login
        : #docker image tag < currentimagename >:tag  puneet2022/learning:< imagenamewhichneedtobereflectinHUBrepo >
-       : #docker push puneet2022/learning:< imagenamewhichneedtobereflectinHUBrepo >
+       : #docker push puneet2022/learning:< imagenamewhichneedtoberzeflectinHUBrepo >
        : #docker pull puneet2022/learning:< imagenamewhichneedtobereflectinHUBrepo >
 - #docker search < nameofimage >   - Command to search a specific image
 - #docker save < imagename >    >   < imagename >.tar    - command to save the image into tar to export to a different system
@@ -83,6 +83,7 @@ Docker Learning
 - Bridge network   - it creates software bridge container tag with bridge network can communicate with each other and provide isolation to another container
 - Host network - it removes the network isolation between the docker host & docker container, i.e container created with publish port 80 can be reached with port 80 outside the world as well
 - None network -  networking is completely disabled in this drive type
+- Note : If you need to be have Specific IP range for Container then you either need to modify Bridge network configuration or modify under global /etc/docker/daemon.json file 
 - #docker network ls    - list all available network drivers
 - #docker inspect network < drivername >    - details of network driver
 - #docker run -dt --network < nameofdriver >   < imagename >   - run container on specific container.
