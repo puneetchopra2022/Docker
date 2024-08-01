@@ -141,7 +141,8 @@ Docker Learning
 - #docker stack ps  - in swarm cluster 
 - #docker stack service - in swarm cluster  
 - #docker stack rm <nameofservice>  -  in swarm cluster 
-- Overlay network driver : The overlay network driver creates a distributed network among multiple Docker daemon hosts. This network sits on top of (overlays) the host-specific networks, allowing containers connected to it to communicate securely when encryption is enabled.
+- Overlay network driver : The overlay network driver creates a distributed network among multiple Docker daemon hosts. This network sits on top of (overlays) the host-specific networks, allowing containers connected to 
+  it to communicate securely when encryption is enabled.
 - #docker network create --driver overlay --name <nameofnetwork>  - this command will create an overlay network driver
 - #docker network create --opt encrypted --driver overlay --name <nameofnetwork> -  this command will create an overlay network driver with ensure communication is secure
 - Split Brain Problem:
