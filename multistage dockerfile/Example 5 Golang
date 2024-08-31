@@ -11,7 +11,7 @@ COPY . .
 RUN CGO_ENABLED=0 go build -o /app  .
 
 
-FROM golang:1.22
+FROM alpine:latest
 COPY --from=build /app /app
 
 #run the application
