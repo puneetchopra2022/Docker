@@ -1,0 +1,18 @@
+# Stage 1: Build stage
+FROM python:3.8-slim AS build-stage
+# Set the working directory in the build stage
+WORKDIR /app
+# Copy only the requirements file to the build stage
+COPY requirements.txt .
+# Install dependencies in the build stage
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Stage 2: Runtime stage with Distroless image
+FROM gcr.io/distroless/python3:debug AS runtime-stage
+# Set the working directory in the runtime stage
+WORKDIR /app
+# Copy only the necessary files from the build stage
+COPY --from=build-stage /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
+COPY --from=build-stage /app .
+# Specify the entry point for the Distroless image
+ENTRYPOINT ["python", "script.py"]
