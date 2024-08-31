@@ -1,0 +1,19 @@
+From golang:1.22 AS build
+WORKDIR /src
+COPY go.mod go.mod
+#download dependencies
+RUN go mod download
+
+#copy source file into image
+COPY . .
+
+#build the final executable
+RUN CGO_ENABLED=0 go build -o /app  .
+
+
+FROM golang:1.22
+COPY --from=build /app /app
+
+#run the application
+EXPOSE 8000
+CMD ["/app"]
