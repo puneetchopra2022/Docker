@@ -104,6 +104,14 @@ CMD ["manage.py", "runserver", "0.0.0.0:8000"]
 
 
 
+========================================================
+FROM ubuntu:latest
+ENV DEBAIN_FRONTEND=noninteractive
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install vim net-tools dnsutils jq -y
+
+============================================================
 
 
 
