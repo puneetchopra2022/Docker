@@ -19,6 +19,12 @@
        --retires=N(default:3)
 -> ENTRYPOINT does not allow you to override the command
 
+CMD commands are ignored by Daemon when there are parameters stated within the docker run command.
+ENTRYPOINT instructions are not ignored, but instead, are appended as command-line parameters by treating those as arguments of the command.
+
+CMD [“executable”, “parameter1”, “parameter2”]
+
+
 
 #vim Dockerfile
 
