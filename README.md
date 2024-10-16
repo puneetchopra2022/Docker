@@ -3,7 +3,7 @@ Docker Learning
 
 **Introduction to Docker**
 
--  Why do we need Docker - Hardware compatibility, OS compatibility, Libraries Dependencies
+- [x]  Why do we need Docker - Hardware compatibility, OS compatibility, Libraries Dependencies
 -  What can docker Do - Run an application on an Isolated container, that has its own network interfaces, libraries, and processors like virtual machines except for all containers that share the same OS kernels.( 
    Hardware > OS > Docker >Conatiner)
 -  Virtual machine VS Docker  - Bootup time, Storage, Utilization.
