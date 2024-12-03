@@ -51,10 +51,11 @@ Docker Learning
 
 **Image Creation, Management & Registry**
 
-- [x] A docker file is built to form an image that holds a set of instructions to run an application.
-- [x] #docker build.     - build an image
-- [x] docker instructions - FROM, CMD, RUN, COPY, ADD , EXPOSE, HEALTHCHECK(HEALTHCHECK --interval=5s CMD ping -c 1 172.17.0.2), WORKDIR, ENTRYPOINT(ENTRYPOINT [‘’/bin/ping ’’]), ENV , LABEL , ARG , USER 
+- [x] A docker file is built to form an image that holds a set of instructions to run an application. #vim Dockerfile
+- [x] #docker build.  - build an image
+- [x] docker instructions - FROM, CMD[“executable”, “parameter1”, “parameter2”], RUN, COPY, ADD , EXPOSE, HEALTHCHECK(HEALTHCHECK --interval=5s CMD ping -c 1 172.17.0.2), WORKDIR, ENTRYPOINT(ENTRYPOINT [‘’/bin/ping ’’]), ENV , LABEL , ARG ,        USER.
 - [x] Reason why every docker image start with FROM : FROM instruction initializes a new build stage and sets the Base Image for subsequent instructions. As such, a valid Dockerfile MUST start with a FROM instruction
+- [x] COPY & ADD are both docker instructions that server similar purpose, they let you copy files or directory a specific location into Docker Image,ADD Allow you to extract a component of tar file from Source directly to destination docker       location.
 - [x] #docker build . -t < nameofimage >:tag            - adding an tag to image while creating image
 - [x] #docker image tag < imageid > < nameofimage >:tag      - addition of tag to existing image
 - [x] #docker image tag < oldimagename >:< oldtag >  <newimagename>:<newtag>  - remain an tag to existing image
@@ -76,20 +77,21 @@ Docker Learning
 - [x] #docker load -i < imagename.tar   - command to extract an image from tar
 - [x] Concept of docker layer: Each instruction belongs to a single layer, the container top layer is a writable layer, and every container uses the same image until the write has been made on the container.
 - [x] #docker run -dt -P < nameofimage >  -  this command all expose of port on random publish ports
-- [x] how to reduce docker image size: Make use of lower size of base image: alpine image, minimum number of layers in image, use COPY instructions after RUN instructions. https://devopscube.com/reduce-docker-image-size/ 
+- [x] how to reduce docker image size: Make use of lower size of base image: alpine image, minimum number of layers in image, use COPY instructions after RUN instructions. https://devopscube.com/reduce-docker-image-size/, Multi stage Built  
 
 **Networking**
 
-- Docker network Drivers  – Community Edition (Bridge, None, Host)  Enterprises Edition (Bridge, Host, none, Macvlan, overlay)
-- Bridge network   - it creates software bridge container tag with bridge network can communicate with each other and provide isolation to another container
-- Host network - it removes the network isolation between the docker host & docker container, i.e container created with publish port 80 can be reached with port 80 outside the world as well
-- None network -  networking is completely disabled in this drive type
-- Note : If you need to be have Specific IP range for Container then you either need to modify Bridge network configuration or modify under global /etc/docker/daemon.json file 
-- #docker network ls    - list all available network drivers
-- #docker inspect network < drivername >    - details of network driver
-- #docker run -dt --network < nameofdriver >   < imagename >   - run container on specific container.
-- #docker network create --driver bridge < nameofcustombridgenetwork >    - create a user define bridge network
-- #docker network create --driver bridge < nameofcustombridgenetwork >  --gateway 172.0.0.1 --subnet 172.0.0.0/24  - create an user define bridge network with custom subnet IP range
+- [x] Docker network Drivers  – Community Edition (Bridge, None, Host)  Enterprises Edition (Bridge, Host, none, Macvlan, overlay)
+- [x] Bridge network   - it creates software bridge container tag with bridge network can communicate with each other and provide isolation to another container
+- [x] Host network - it removes the network isolation between the docker host & docker container, i.e container created with publish port 80 can be reached with port 80 outside the world as well
+- [x] None network -  networking is completely disabled in this drive type
+- [x] Note : If you need to be have Specific IP range for Container then you either need to modify Bridge network configuration or modify under global /etc/docker/daemon.json file 
+- [x] #docker network ls    - list all available network drivers
+- [x] #docker inspect network < drivername >    - details of network driver
+- [x] #docker run -dt --network < nameofdriver >   < imagename >   - run container on specific container.
+- [x] User-defined bridge network - You can create a user-defined bridge network that is superior to the default bridge network (DNS-based name resolution, the container can be attached and detached on the fly)
+- [x] #docker network create --driver bridge < nameofcustombridgenetwork >    - create a user define bridge network
+- [x] #docker network create --driver bridge < nameofcustombridgenetwork >  --gateway 172.0.0.1 --subnet 172.0.0.0/24  - create an user define bridge network with custom subnet IP range
 
 **Storage & Logging Driver**
 - #docker info   - check active storage Driver & logging Driver
