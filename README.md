@@ -169,9 +169,10 @@
 
 
 **Getting Hand-Dirty with Practices**
-<details>
-  <summary>Installation of Docker.sh</summary>
-  #!/bin/bash 
+### Script Overview
+The following script explains how to configure and run the application.
+```bash
+#!/bin/bash 
 echo "##############################Run the following command to uninstall all conflicting packages#######################################"
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 echo "#########################################Set up Docker's apt repository##############################################################"
@@ -191,5 +192,3 @@ echo "####################Starting Docker#######################################
 systemctl enable docker
 systemctl start docker
 systemctl status docker
-  
-</details>
