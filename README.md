@@ -169,6 +169,9 @@
 
 
 **Getting Hand-Dirty with Practices**
+<details>
+  <summary>Introduction to Docker</summary>
+
 ### Script Overview
 The following script explains how to configure and run the application.
 ```bash
@@ -192,3 +195,5 @@ echo "####################Starting Docker#######################################
 systemctl enable docker
 systemctl start docker
 systemctl status docker
+
+</details>
