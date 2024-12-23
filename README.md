@@ -200,7 +200,7 @@ systemctl status docker
 
 <details>
   <summary>Basic Dockerfile</summary>
-================
+```bash
 FROM ubuntu
 RUN apt-get update -y
 RUN apt-get install -y nginx
@@ -208,9 +208,10 @@ WORKDIR /var/www/html
 COPY index.nginx-debian.html  .
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"] 
-==============
+
 or
-=======
+
+```bash
 FROM ubuntu
 RUN apt-get update -y
 RUN apt-get install -y nginx
@@ -219,10 +220,6 @@ COPY index.html  /usr/share/nginx/html
 EXPOSE 80
 ADD compressedfile.tar.gz /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"] 
-=========
-</details>
-
-<details>
-  <summary>installation of docker.sh</summary>
 
 </details>
+
