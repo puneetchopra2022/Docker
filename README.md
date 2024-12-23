@@ -172,7 +172,9 @@
 
 <details>
   <summary>Getting Hand-Dirty with Practices</summary>
-===================Installation of Docker========================  
+===================Installation of Docker========================
+
+
 ```bash
 #!/bin/bash 
 echo "##############################Run the following command to uninstall all conflicting packages#######################################"
@@ -210,7 +212,6 @@ CMD ["nginx", "-g", "daemon off;"]
 
 0R
 
-```bash
 FROM ubuntu
 RUN apt-get update -y
 RUN apt-get install -y nginx
