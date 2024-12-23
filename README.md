@@ -49,53 +49,13 @@
   
 </details>
 
+<details>
+  <summary>**Image Creation, Management & Registry**</summary>
+
+  
+</details>
 
 
-- Why do we need Docker - when application developer develop an application they need to look for Hardware compatibility, OS compatibility, Libraries Dependencies before to deploy application on server & they need to do same for each installation which is kind of tricky job.
-- What can docker Do - Run an application on an Isolated container, that has its own network interfaces, libraries, and processors like virtual machines except for all containers that share the same OS kernels.(Hardware > OS > Docker > Container).
-- Virtual machine VS Docker  - Bootup time, Storage, memory Utilization.
-- Docker Edition - Community Edition(free) , Enterprise Edition (paid).
-- Docker installation - Windows(docker desktop) , Linux ( docker).
-- #systemctl status docker    -command to check docker daemon service running status.
-- #systemctl start docker - command to manual start docker daemon.
-- #systemctl stop docker - command to stop docker daemon.
-- #systemctl enable docker  -command to ensure docker daemon service starts after restart of base machine Hardware.
-- #docker version - check the version of the docker.
-- #sudo journalctl -u docker   - this command is useful in case when docker service fails to start & need to investigate docker logs.
-- A disadvantage of docker - data inside a docker container is not persistent on restart or stop has been made on the container level.
-- Docker image: A Docker image is a file that contains all necessary dependencies & Configuration which is used to run an application.
-- Docker Container: is a running instance of an image.
-- #docker pull <imagename>  -command to pull image.
-- #docker image ls  -command to list images.
-- #docker run < imagename >   - command to launch an container.
-- #docker ps  - list all active container list or ps means process status.
-- #docker ps -a - list all active & exit container list.
-- #docker stop < containerid.name >   - stop a container before to remove a container.
-- #docker rm < container id/name >  - remove an container.
-- #docker rmi < image name >    - delete an image from disk.
-- #docker logs < container ID >   - check log of container.
-- #docker run --name < containername >  < imagename >    - command to run container with specific name.
-- #docker inspect < container ID/Name >    -   get details about active container.
-- #docker run -d < imagename >    - run container in detached mode. 
-- Expose in docker: Tinforms Docker that the container will listen on the specified port,Works only for communication between containers in the same   network.
-- Publish in docker: This means container port is accessible through the docker host, when we  publish it.
-- #docker run --expose 8765 nginx
-- #docker run -d -p 8080:80 < imagename >   - run an container with publish port.
-- #docker exec -it < container name > bash    - exec into container.
-- #docker run -d < imagename > command - command to override the container default command.
-- Restart Policies in Docker - no, unless-stopped( it is similar to the always flag the only difference is once the container is stopped manually it   will not restart automatically even after restarting the docker daemon, until we start the container manually again.), on-failure(Restart the        container if it exits due to an non-zero exit code. Exit code :- 0 means no error), always (Always restart the container if it stops. If 
-  it's manually stopped, it's restarted only when the Docker daemon restarts or the container itself is manually restarted).
-- #docker run --restart unless-stopped <imagename> .
-- #docker system df    - command is used to display information about disk usage by Docker. It provides details on the size of images, containers,      local volumes, and the overall disk space being used
-- #docker system df -v   - command provides a detailed breakdown of Docker's disk usage, including information about individual images,                containers, volumes, and build cache.
-- #docker run -d  --rm < imagename >  -  command to delete an container after exit.
-- #docker rename < oldcontainername >  < newcontainername >        - command to rename container.
-- #docker top < container ID > — command gives details of Process id belonging to the container.
-- #docker ps --size  – command gives information on the current size of the docker container writable layer + size of the image.
-- #apt install  net-tools ------ to install ifconfig package.
-- #apt install  procps  ----- to install the TOP command package.
-
-**Image Creation, Management & Registry**
 
 - [x] A docker file is built to form an image that holds a set of instructions to run an application. #vim Dockerfile
 - [x] #docker build.  - build an image
