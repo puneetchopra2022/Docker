@@ -168,11 +168,11 @@
 - #docker container exec -it <container ID> ls -l /run/secrets  
 
 
-**Getting Hand-Dirty with Practices**
+
 
 <details>
-  <summary>installation of docker.sh</summary>
-  
+  <summary>Getting Hand-Dirty with Practices</summary>
+===================Installation of Docker========================  
 ```bash
 #!/bin/bash 
 echo "##############################Run the following command to uninstall all conflicting packages#######################################"
@@ -195,13 +195,10 @@ systemctl enable docker
 systemctl start docker
 systemctl status docker
 
----**
-
-</details>
+===============================================
 
 
-<details>
-  <summary>Basic Dockerfile</summary>
+========Basic DockerFile=============
 ```bash
 FROM ubuntu
 RUN apt-get update -y
@@ -211,7 +208,7 @@ COPY index.nginx-debian.html  .
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"] 
 
-or
+0R
 
 ```bash
 FROM ubuntu
@@ -223,5 +220,5 @@ EXPOSE 80
 ADD compressedfile.tar.gz /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"] 
 
-</details>
+====================================================
 
