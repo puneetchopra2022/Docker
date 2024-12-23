@@ -3,8 +3,8 @@
 <details>
   <summary>Introduction to Docker</summary>
 
- - Why do we need Docker - when application developer develop an application they need to look for Hardware compatibility, OS compatibility, Libraries Dependencies before to deploy application on server & they need to do same for each installation which is kind of tricky job.
-- What can docker Do - Run an application on an Isolated container, that has its own network interfaces, libraries, and processors like virtual machines except for all containers that share the same OS kernels.(Hardware > OS > Docker > Container).
+- Why do we need Docker - when application developer develop an application they need to look for Hardware compatibility, OS compatibility,            Libraries Dependencies before to deploy application on server & they need to do same for each installation which is kind of tricky job.
+- What can docker Do - Run an application on an Isolated container, that has its own network interfaces, libraries, and processors like virtual        machines except for all containers that share the same OS kernels.(Hardware > OS > Docker > Container).
 - Virtual machine VS Docker  - Bootup time, Storage, memory Utilization.
 - Docker Edition - Community Edition(free) , Enterprise Edition (paid).
 - Docker installation - Windows(docker desktop) , Linux ( docker).
@@ -17,7 +17,7 @@
 - A disadvantage of docker - data inside a docker container is not persistent on restart or stop has been made on the container level.
 - Docker image: A Docker image is a file that contains all necessary dependencies & Configuration which is used to run an application.
 - Docker Container: is a running instance of an image.
-- #docker pull <imagename>  -command to pull image.
+- #docker pull <imagename>  - command to pull image.
 - #docker image ls  -command to list images.
 - #docker run < imagename >   - command to launch an container.
 - #docker ps  - list all active container list or ps means process status.
@@ -29,9 +29,9 @@
 - #docker run --name < containername >  < imagename >    - command to run container with specific name.
 - #docker inspect < container ID/Name >    -   get details about active container.
 - #docker run -d < imagename >    - run container in detached mode. 
-- Expose in docker: Tinforms Docker that the container will listen on the specified port,Works only for communication between containers in the same   network.
+- Expose in docker: informs Docker that the container will listen on the specified port,Works only for communication between containers in the same    network.
 - Publish in docker: This means container port is accessible through the docker host, when we  publish it.
-- #docker run --expose 8765 nginx
+- #docker run --expose < port > nginx
 - #docker run -d -p 8080:80 < imagename >   - run an container with publish port.
 - #docker exec -it < container name > bash    - exec into container.
 - #docker run -d < imagename > command - command to override the container default command.
@@ -57,33 +57,7 @@
 
 
 
-- [x] A docker file is built to form an image that holds a set of instructions to run an application. #vim Dockerfile
-- [x] #docker build.  - build an image
-- [x] docker instructions - FROM, CMD[“executable”, “parameter1”, “parameter2”], RUN, COPY, ADD , EXPOSE, HEALTHCHECK(HEALTHCHECK --interval=5s CMD ping -c 1 172.17.0.2), WORKDIR, ENTRYPOINT(ENTRYPOINT [‘’/bin/ping ’’]), ENV , LABEL , ARG ,        USER.
-- [x] Reason why every docker image start with FROM : FROM instruction initializes a new build stage and sets the Base Image for subsequent instructions. As such, a valid Dockerfile MUST start with a FROM instruction
-- [x] COPY & ADD are both docker instructions that server similar purpose, they let you copy files or directory a specific location into Docker Image,ADD Allow you to extract a component of tar file from Source directly to destination docker       location.
-- [x] #docker build . -t < nameofimage >:tag            - adding an tag to image while creating image
-- [x] #docker image tag < imageid > < nameofimage >:tag      - addition of tag to existing image
-- [x] #docker image tag < oldimagename >:< oldtag >  <newimagename>:<newtag>  - remain an tag to existing image
-- [x] #docker commit < containerid >  < newimagename >        - create an new image with updated container information.
-- [x] #docker image history < nameofimage >   - list layers of image
-- [x] #docker image inspect < nameofimage >  - details about docker image
-- [x] #docker image prune   - delete only dangling images + unreferenced by any container
-- [x] #docker image prune -a    - delete all images not referenced by any container
-- [x] Docker Registry - The concept of Registry comes in place as it's not recommended to have custom images on a local repository on a local disk it is available on the registry that is easily accessible to anyone  - 
-  Docker Hub, AWS ECR, Docker Registry, Docker Trusted registry
-- [x] Docker Hub repo push & pull
-       : Create an Docker Hub account
-       : #docker login
-       : #docker image tag < currentimagename >:tag  puneet2022/learning:< imagenamewhichneedtobereflectinHUBrepo >
-       : #docker push puneet2022/learning:< imagenamewhichneedtoberzeflectinHUBrepo >
-       : #docker pull puneet2022/learning:< imagenamewhichneedtobereflectinHUBrepo >
-- [x] #docker search < nameofimage >   - Command to search a specific image
-- [x] #docker save < imagename >    >   < imagename >.tar    - command to save the image into tar to export to a different system
-- [x] #docker load -i < imagename.tar   - command to extract an image from tar
-- [x] Concept of docker layer: Each instruction belongs to a single layer, the container top layer is a writable layer, and every container uses the same image until the write has been made on the container.
-- [x] #docker run -dt -P < nameofimage >  -  this command all expose of port on random publish ports
-- [x] how to reduce docker image size: Make use of lower size of base image: alpine image, minimum number of layers in image, use COPY instructions after RUN instructions. https://devopscube.com/reduce-docker-image-size/, Multi stage Built  
+ 
 
 **Networking**
 
@@ -169,11 +143,10 @@
 
 
 **Getting Hand-Dirty with Practices**
-<details>
-  <summary>Introduction to Docker</summary>
 
-### Script Overview
-The following script explains how to configure and run the application.
+<details>
+  <summary>installation of docker.sh</summary>
+  
 ```bash
 #!/bin/bash 
 echo "##############################Run the following command to uninstall all conflicting packages#######################################"
