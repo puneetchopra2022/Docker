@@ -1,5 +1,5 @@
 ### Example Script: `backup.sh`
-#### Code:
+```bash
 
 #!/bin/bash 
 echo "##############################Run the following command to uninstall all conflicting packages#######################################"
