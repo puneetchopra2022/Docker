@@ -51,7 +51,33 @@
 
 <details>
   <summary>Image Creation, Management & Registry</summary>
-
+  
+- A docker file is built to form an image that holds a set of instructions to run an application. #vim Dockerfile
+- #docker build.  - build an image
+- docker instructions - FROM, CMD[“executable”, “parameter1”, “parameter2”], RUN, COPY, ADD , EXPOSE, HEALTHCHECK(HEALTHCHECK --interval=5s CMD ping   -c 1 172.17.0.2), WORKDIR, ENTRYPOINT(ENTRYPOINT [‘’/bin/ping ’’]), ENV , LABEL , ARG , USER.
+- Reason why every docker image start with FROM : FROM instruction initializes a new build stage and sets the Base Image for subsequent                instructions. As such, a valid Dockerfile MUST start with a FROM instruction
+- COPY & ADD are both docker instructions that server similar purpose, they let you copy files or directory a specific location into Docker            Image,ADD Allow you to extract a component of tar file from Source directly to destination docker location.
+- #docker build . -t < nameofimage >:tag     - adding an tag to image while creating image
+- #docker image tag < imageid > < nameofimage >:tag      - addition of tag to existing image
+- #docker image tag < oldimagename >:< oldtag >  <newimagename>:<newtag>  - rename an tag to existing image
+- #docker commit < containerid >  < newimagename >        - create an new image with updated container information.
+- #docker image history < nameofimage >   - list layers of image
+- #docker image inspect < nameofimage >  - details about docker image
+- #docker image prune   - delete only dangling images + unreferenced by any container
+- #docker image prune -a    - delete all images not referenced by any container
+- Docker Registry - The concept of Registry comes in place as it's not recommended to have custom images on a local repository on a local disk it is   available on the registry that is easily accessible to anyone  - Docker Hub, AWS ECR, Docker Registry, Docker Trusted registry
+- Docker Hub repo push & pull
+       : Create an Docker Hub account
+       : #docker login
+       : #docker image tag < currentimagename >:tag  puneet2022/learning:< imagenamewhichneedtobereflectinHUBrepo >
+       : #docker push puneet2022/learning:< imagenamewhichneedtoberzeflectinHUBrepo >
+       : #docker pull puneet2022/learning:< imagenamewhichneedtobereflectinHUBrepo >
+- #docker search < nameofimage >   - Command to search a specific image
+- #docker save < imagename >    >   < imagename >.tar    - command to save the image into tar to export to a different system
+- #docker load -i < imagename.tar   - command to extract an image from tar
+- Concept of docker layer: Each instruction belongs to a single layer, the container top layer is a writable layer, and every container uses the       same image until the write has been made on the container.
+- #docker run -dt -P < nameofimage >  -  this command publish port on random publish ports
+- how to reduce docker image size: Make use of lower size of base image: alpine image, minimum number of layers in image, use COPY instructions        after RUN instructions. https://devopscube.com/reduce-docker-image-size/, Multi stage Built 
   
 </details>
 
