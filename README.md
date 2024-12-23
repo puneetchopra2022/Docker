@@ -1,5 +1,14 @@
 # Docker
 
+<details>
+  <summary>Click to expand notes on Feature 1</summary>
+
+  - **Point 1**: Description of Point 1.
+  - **Point 2**: Detailed explanation or example for Point 2.
+  - **Point 3**: Additional resources or context.
+  
+</details>
+
 **Introduction to Docker**
 
 - Why do we need Docker - when application developer develop an application they need to look for Hardware compatibility, OS compatibility, Libraries Dependencies before to deploy application on server & they need to do same for each installation which is kind of tricky job.
@@ -30,22 +39,21 @@
 - #docker run -d < imagename >    - run container in detached mode. 
 - Expose in docker: Tinforms Docker that the container will listen on the specified port,Works only for communication between containers in the same   network.
 - Publish in docker: This means container port is accessible through the docker host, when we  publish it.
-- [x] #docker run --expose 8765 nginx
-- [x] #docker run -d -p 8080:80 < imagename >   - run an container with publish port   (/)
-- [x] #docker exec -it < conatiner name > bash    - exec into container   (/)
-- [x] #docker run -d < imagename > command - command to override the container default command  (/)
-- [x] Restart Policies in Docker - no, unless-stopped( it is similar to the always flag the only difference is once the container is stopped manually it will not restart automatically even after restarting the docker 
-   daemon, until we start the container manually again.), on-failure(Restart the container if it exits due to an non-zero exit code. Exit code :- 0 means no error), always (Always restart the container if it stops. If 
-   it's manually stopped, it's restarted only when the Docker daemon restarts or the container itself is manually restarted)  (/)
-- [x] #docker run --restart unless-stopped <imagename>    (/)
-- [x] #docker system df    -command to check disk space   (/)
-- [x] #docker system df -v   - command to show container & image wiae size   (/)
-- [x] #docker run -d  --rm < imagename >   command to delete an container after exit  (/)
-- [x] #docker rename < oldcontainername >  < newcontainername >        - command to rename container  (/)
-- [x] #docker top < conatiner ID > — command gives details of Process id belonging to the container  (/)
-- [x] #docker ps --size  – command gives information on the current size of the docker container  (/)
-- [x] #apt install  net-tools ------ to install ifconfig package   (/)
-- [x] #apt install  procps  ----- to install the TOP command package   (/)
+- #docker run --expose 8765 nginx
+- #docker run -d -p 8080:80 < imagename >   - run an container with publish port.
+- #docker exec -it < container name > bash    - exec into container.
+- #docker run -d < imagename > command - command to override the container default command.
+- Restart Policies in Docker - no, unless-stopped( it is similar to the always flag the only difference is once the container is stopped manually it   will not restart automatically even after restarting the docker daemon, until we start the container manually again.), on-failure(Restart the        container if it exits due to an non-zero exit code. Exit code :- 0 means no error), always (Always restart the container if it stops. If 
+  it's manually stopped, it's restarted only when the Docker daemon restarts or the container itself is manually restarted).
+- #docker run --restart unless-stopped <imagename> .
+- #docker system df    - command is used to display information about disk usage by Docker. It provides details on the size of images, containers,      local volumes, and the overall disk space being used
+- #docker system df -v   - command provides a detailed breakdown of Docker's disk usage, including information about individual images,                containers, volumes, and build cache.
+- #docker run -d  --rm < imagename >  -  command to delete an container after exit.
+- #docker rename < oldcontainername >  < newcontainername >        - command to rename container.
+- #docker top < container ID > — command gives details of Process id belonging to the container.
+- #docker ps --size  – command gives information on the current size of the docker container writable layer + size of the image.
+- #apt install  net-tools ------ to install ifconfig package.
+- #apt install  procps  ----- to install the TOP command package.
 
 **Image Creation, Management & Registry**
 
