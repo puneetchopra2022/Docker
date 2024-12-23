@@ -196,3 +196,33 @@ systemctl start docker
 systemctl status docker
 
 </details>
+
+
+<details>
+  <summary>Basic Dockerfile</summary>
+================
+FROM ubuntu
+RUN apt-get update -y
+RUN apt-get install -y nginx
+WORKDIR /var/www/html
+COPY index.nginx-debian.html  .
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"] 
+==============
+or
+=======
+FROM ubuntu
+RUN apt-get update -y
+RUN apt-get install -y nginx
+WORKDIR /usr/share/nginx/html
+COPY index.html  /usr/share/nginx/html
+EXPOSE 80
+ADD compressedfile.tar.gz /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"] 
+=========
+</details>
+
+<details>
+  <summary>installation of docker.sh</summary>
+
+</details>
