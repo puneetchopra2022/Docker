@@ -201,7 +201,6 @@ systemctl status docker
 
 
 ========Basic DockerFile=============
-```bash
 FROM ubuntu
 RUN apt-get update -y
 RUN apt-get install -y nginx
@@ -222,4 +221,21 @@ ADD compressedfile.tar.gz /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"] 
 
 ====================================================
+
+==============Heathcheck Docker file example========
+#HEALTHCHECK :
+    #  HEALTHCHECK –interval=5s CMD ping -c 1 172.17.0.2
+    #   --interval=DURATION(default:30s)
+    #   --timeout=DURATION(default:30s)
+    #   --start-period=Duration(default=0s)
+    #   --retires=N(default:3)
+
+From busybox
+HEALTHCHECK --interval=3s CMD ping -c 1 172.17.0.5
+
+#####
+#docker build .
+#docker run -dt <imageid> sleep 5000
+
+=================================================================
 
