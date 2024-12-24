@@ -54,7 +54,7 @@
   
 - A docker file is built to form an image that holds a set of instructions to run an application. #vim Dockerfile
 - #docker build.  - build an image
-- docker instructions - FROM, CMD[“executable”, “parameter1”, “parameter2”], RUN, COPY, ADD , EXPOSE, HEALTHCHECK(HEALTHCHECK --interval=5s CMD ping   -c 1 172.17.0.2), WORKDIR, ENTRYPOINT(ENTRYPOINT [‘’/bin/ping ’’]), ENV , LABEL , ARG , USER.
+- docker instructions - FROM, CMD[“executable”, “parameter1”, “parameter2”], RUN, COPY, ADD , EXPOSE, HEALTHCHECK(HEALTHCHECK --interval=5s CMD ping -c 1 172.17.0.2), WORKDIR, ENTRYPOINT(ENTRYPOINT [‘’/bin/ping ’’]), ENV , LABEL , ARG ,      USER.
 - Reason why every docker image start with FROM : FROM instruction initializes a new build stage and sets the Base Image for subsequent                instructions. As such, a valid Dockerfile MUST start with a FROM instruction
 - COPY & ADD are both docker instructions that server similar purpose, they let you copy files or directory a specific location into Docker            Image,ADD Allow you to extract a component of tar file from Source directly to destination docker location.
 - #docker build . -t < nameofimage >:tag     - adding an tag to image while creating image
@@ -238,4 +238,297 @@ HEALTHCHECK --interval=3s CMD ping -c 1 172.17.0.5
 #docker run -dt <imageid> sleep 5000
 
 =================================================================
+
+=======EntryPoint DockerFile example =======
+FROM busybox
+ENTRYPOINT [‘’/bin/ping ’’]
+
+
+#docker build .
+#docker run -dt <imageid> -c 1 8.8.8.8
+==============================================
+
+=======Example of Building an Python APP==========
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
+# Set the working directory in the container
+WORKDIR /app
+# Copy the current directory contents into the container at /app
+COPY . /app
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+# Run script.py when the container launches
+CMD ["python", "script.py"]
+
+OR
+
+FROM ubuntu
+WORKDIR /app
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip && \
+    pip install -r requirements.txt && \
+    cd devops
+COPY requirements.txt /app
+ENV DEBAIN_FRONTEND=noninteractive
+COPY devops /app
+ENTRYPOINT ["python3"]
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+
+====================================================
+
+===============Multistage Python App=================
+
+# Stage 1: Build stage
+FROM python:3.8-slim AS build-stage
+# Set the working directory in the build stage
+WORKDIR /app
+# Copy only the requirements file to the build stage
+COPY requirements.txt .
+# Install dependencies in the build stage
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Stage 2: Runtime stage with Distroless image
+FROM gcr.io/distroless/python3:debug AS runtime-stage
+# Set the working directory in the runtime stage
+WORKDIR /app
+# Copy only the necessary files from the build stage
+COPY --from=build-stage /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
+COPY --from=build-stage /app .
+# Specify the entry point for the Distroless image
+ENTRYPOINT ["python", "script.py"]
+
+OR
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Reference GithUb https://github.com/LondheShubham153/python-multistage-docker
+
+
+# ------------------- Stage 1: Build Stage ------------------------------
+FROM python:3.9 AS backend-builder
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the contents of the backend directory into the container at /app
+COPY backend/ .
+
+# Install dependencies specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# ------------------- Stage 2: Final Stage ------------------------------
+
+# Use a slim Python 3.9 image as the final base image
+FROM python:3.9-slim
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the built dependencies from the backend-builder stage
+COPY --from=backend-builder /usr/local/lib/python3.9/site-packages/ /usr/local/lib/python3.9/site-packages/
+
+# Copy the application code from the backend-builder stage
+COPY --from=backend-builder /app /app
+
+# Expose port 5000 for the Flask application
+EXPOSE 5000
+
+# Define the default command to run the application
+CMD ["python", "app.py"]
+
+=========================================================================
+
+==============Multistage Docker example =================
+# Build Stage 
+FROM node:22-alphine3.20 as build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install 
+RUN npm install --production 
+RUN npm install -g serve
+COPY . .
+RUN npm run build
+
+#Stage 2
+FROM node:22-alphine3.20
+WOKDIR /app
+COPY --from=build /app/build /app/build
+EXPOSE 3000
+CMD ["serve", "-s","build"]
+
+====================================================
+
+==================Java based application ===============
+# Stage 1: Build an application 
+FROM maven:3.8.4-openjdk-11 AS builder 
+WORKDIR /app
+COPY pom.xml  .
+COPY src  ./src
+RUN mvn package 
+
+
+# Stage 2: Create the final image 
+From openjdk:11-jre-slim
+WORKDIR /app
+COPY --from=builder /app/target/*.jar ./app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
+=========================================================
+
+=================Golang based App ========================
+# Stage1 
+FROM ubuntu AS build
+RUN apt-get update && apt-get install -y golang-go
+ENV GO111MODULE=off
+COPY . .
+RUN CGO_ENABLED=0 go build -o /app .
+
+############################################
+# HERE STARTS THE MAGIC OF MULTI STAGE BUILD
+############################################
+
+FROM scratch
+# Copy the compiled binary from the build stage
+COPY --from=build /app /app
+# Set the entrypoint for the container to run the binary
+ENTRYPOINT ["/app"]
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+From golang:1.22 AS build
+WORKDIR /src
+COPY go.mod go.mod
+#download dependencies
+RUN go mod download
+
+#copy source file into image
+COPY . .
+
+#build the final executable
+RUN CGO_ENABLED=0 go build -o /app  .
+
+
+FROM alpine:latest
+COPY --from=build /app /app
+
+#run the application
+EXPOSE 8000
+CMD ["/app"]
+
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+From golang:1.22 AS build
+WORKDIR /src
+COPY go.mod go.mod
+#download dependencies
+RUN go mod download
+
+#copy source file into image
+COPY . .
+
+#build the final executable
+RUN CGO_ENABLED=0 go build -o /app  .
+
+
+FROM scratch
+COPY --from=build /app /app
+
+#run the application
+EXPOSE 8000
+CMD ["/app"]
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+# Stage 1 
+FROM node:21 As backend-builder 
+
+#setup the working Dir
+WOKDIR /app
+
+#code copy 
+COPY .  .
+
+RUN npm i
+
+#stage 2 
+FROM node:21-slim
+
+#setup the working dir 
+WOKDIR /app
+
+#copy the above stage as compressed stage 
+COPY --from=backend-builder /app .
+COPY .env.sample .env
+EXPOSE 5000
+CMD ["npm", "start"]
+
+================================
+
+==========DokcerFile with USER intructions =======
+
+# Start with a base image
+FROM ubuntu:20.04
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update and install necessary packages
+RUN apt-get update && \
+    apt-get install -y \
+    curl \
+    sudo && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Add a new user and group
+RUN groupadd -r appgroup && useradd -r -g appgroup -m appuser
+
+# Create a directory and adjust permissions
+RUN mkdir -p /app && chown -R appuser:appgroup /app
+
+# Set the working directory
+WORKDIR /app
+
+# Copy application files to the container
+COPY app/ .
+
+# Change user to the non-root user
+USER appuser
+
+# Command to run the application
+CMD ["bash", "-c", "echo Hello from appuser!"]
+
+====================================================================
+
+
+=========Docker File with LABEL as example ===================
+# Start with a base image
+FROM python:3.9-slim
+
+# Add metadata using LABEL instruction
+LABEL maintainer="John Doe <johndoe@example.com>"
+LABEL version="1.0"
+LABEL description="A simple Python application"
+
+# Set the working directory
+WORKDIR /app
+
+# Copy application files to the container
+COPY app/ .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Command to run the application
+CMD ["python", "app.py"]
+
+=================================================
+
+
+
+
+
 
