@@ -55,8 +55,8 @@
 - A docker file is built to form an image that holds a set of instructions to run an application. #vim Dockerfile
 - #docker build.  - build an image
 - docker instructions - FROM, CMD[“executable”, “parameter1”, “parameter2”], RUN, COPY, ADD , EXPOSE, HEALTHCHECK(HEALTHCHECK --interval=5s CMD ping -c 1 172.17.0.2), WORKDIR, ENTRYPOINT(ENTRYPOINT [‘’/bin/ping ’’]), ENV , LABEL , ARG ,      USER.
-- Reason why every docker image start with FROM : FROM instruction initializes a new build stage and sets the Base Image for subsequent                instructions. As such, a valid Dockerfile MUST start with a FROM instruction
-- COPY & ADD are both docker instructions that server similar purpose, they let you copy files or directory a specific location into Docker            Image,ADD Allow you to extract a component of tar file from Source directly to destination docker location.
+- Reason why every docker image start with FROM : FROM instruction initializes a new build stage and sets the Base Image for subsequent instructions. As such, a valid Dockerfile MUST start with a FROM instruction
+- COPY & ADD are both docker instructions that server similar purpose, they let you copy files or directory a specific location into Docker Image,ADD Allow you to extract a component of tar file from Source directly to destination docker location.
 - #docker build . -t < nameofimage >:tag     - adding an tag to image while creating image
 - #docker image tag < imageid > < nameofimage >:tag      - addition of tag to existing image
 - #docker image tag < oldimagename >:< oldtag >  <newimagename>:<newtag>  - rename an tag to existing image
@@ -75,10 +75,11 @@
 - #docker search < nameofimage >   - Command to search a specific image
 - #docker save < imagename >    >   < imagename >.tar    - command to save the image into tar to export to a different system
 - #docker load -i < imagename.tar   - command to extract an image from tar
-- Concept of docker layer: Each instruction belongs to a single layer, the container top layer is a writable layer, and every container uses the       same image until the write has been made on the container.
+- Concept of docker layer: Each instruction belongs to a single layer, the container top layer is a writable layer, and every container uses the same image until the write has been made on the container.
 - #docker run -dt -P < nameofimage >  -  this command publish port on random publish ports
-- how to reduce docker image size: Make use of lower size of base image: alpine image, minimum number of layers in image, use COPY instructions        after RUN instructions. https://devopscube.com/reduce-docker-image-size/, Multi stage Built 
-  
+- how to reduce docker image size: Make use of lower size of base image: alpine image, minimum number of layers in image, use COPY instructions after RUN instructions. https://devopscube.com/reduce-docker-image-size/, Multi stage Built
+- Distroless images are a type of Docker image that includes only the essential components needed to run an application, without including an entire operating system or package manager. They are smaller, more secure, and faster to start up     compared to traditional images like debian, ubuntu, or alpine.  Advantage : Small Size, Without Shell its harder for attackers to exploit vulnerabilities, Faster startup time
+- Example of Distroless images : gcr.io/distroless/python3 , gcr.io/distroless/java , gcr.io/distroless/java , gcr.io/distroless/base
 </details>
 
 
